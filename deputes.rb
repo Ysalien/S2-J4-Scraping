@@ -59,6 +59,7 @@ def deputes_email
 
 end
 
+deputes_name
 deputes_email
 
 end
