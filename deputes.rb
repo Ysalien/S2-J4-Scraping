@@ -23,9 +23,7 @@ def deputes_name
   end
 
   hash = Hash[last_names.zip(first_names)]
-  a = hash.map {|last_names, first_names| {:Nom => last_names, :Prénom => first_names}}
-  puts a
-
+  puts hash.map {|last_names, first_names| {:Nom => last_names, :Prénom => first_names}}
 end
 
 
@@ -52,7 +50,7 @@ def deputes_email
   link.each {|link| puts all_email(link['href'].delete_prefix('.'))}
 
   d_mail = []
-  deputes_email.each do |link|
+  email.each do |link|
     test = link.text
     d_mail << test
   end
