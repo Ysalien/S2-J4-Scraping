@@ -40,16 +40,16 @@ end
 
 def all_email(link)
   page = Nokogiri::HTML(open("http://www2.assemblee-nationale.fr#{link}"))
-  mail = page.css("dd:nth-child(8) ul li a")[0]
+  mail = page.css("dd:nth-child(8) > ul > li:nth-child(1) > a")
   contact = page.css("dt:nth-child(7)")
-  puts "#{contact.text} : #{mail}"
+  mail.map{|element| element['href'].delete_prefix("mailto:")}
 end
 
 
 def deputes_email
   page = Nokogiri::HTML(open("http://www2.assemblee-nationale.fr/deputes/liste/regions/(vue)/tableau"))
   link = page.css('td:nth-child(8) a')
-  link.each {|link| puts all_email(link['href'])}
+  link.each {|link| puts all_email(link['href'].delete_prefix('.'))}
 
   d_mail = []
   deputes_email.each do |link|
@@ -58,7 +58,6 @@ def deputes_email
   end
 
 end
-
 deputes_name
 deputes_email
 
